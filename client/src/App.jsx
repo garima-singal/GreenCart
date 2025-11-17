@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from "./components/Navbar";
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -9,6 +10,8 @@ import Login from './components/Login';
 import AllProducts from './pages/AllProducts';
 import ProductCategory from './pages/ProductCategory';
 import ProductDetails from './pages/ProductDetails';
+
+
 
 const App = () => {
     const isSellerPath = useLocation().pathname.includes("seller");
