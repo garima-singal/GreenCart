@@ -1,65 +1,9 @@
-// import React from "react";
-// import { assets } from "../assets/assets";
-// import { useAppContext } from "../context/AppContext";
 
-// const ProductCard = ({product}) => {
-//     const [count, setCount] = React.useState(0);
-//     const {currency ,addtoCart , removeFromCart , cartItems , navigate} = useAppContext ();
-   
-
-//     return product && (
-//         <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
-//             <div className="group cursor-pointer flex items-center justify-center px-2">
-//                 <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" src={product.image[0]} alt={product.name} />
-//             </div>
-//             <div className="text-gray-500/60 text-sm">
-//                 <p>{product.category}</p>
-//                 <p className="text-gray-700 font-medium text-lg truncate w-full">{product.name}</p>
-//                 <div className="flex items-center gap-0.5">
-//                     {Array(5).fill('').map((_, i) => (
-                        
-//                            <img key={i} src={i<4 ? assets.star_icon : assets.star_dull_icon}  className="md:w-3.5 w-3"
-//  alt ="" />
-                        
-//                     ))}
-//                     <p>({4})</p>
-//                 </div>
-//                 <div className="flex items-end justify-between mt-3">
-//                     <p className="md:text-xl text-base font-medium text-indigo-500">
-//                       {currency}${product.offerPrice}{" "} <span className="text-gray-500/60 md:text-sm text-xs line-through">{currency}${product.price}</span>
-//                     </p>
-//                     <div className="text-indigo-500">
-//                         {!cartItems[product._id] ? (
-//                             <button className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-20 w-16 h-[34px] rounded text-indigo-600 font-medium" onClick={() => setCount(1)} >
-//                               <img src={assets.cart_icon} alt="Cart" />
-//                                 Add
-//                             </button>
-//                         ) : (
-//                             <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-indigo-500/25 rounded select-none">
-//                                 <button onClick={() => setCount((prev) => Math.max(prev - 1, 0))} className="cursor-pointer text-md px-2 h-full" >
-//                                     -
-//                                 </button>
-//                                 <span className="w-5 text-center">{cartItems[product._id]}</span>
-//                                 <button onClick={() => setCount((prev) => prev + 1)} className="cursor-pointer text-md px-2 h-full" >
-//                                     +
-//                                 </button>
-//                             </div>
-//                         )}
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default ProductCard ;
-//..............................................................................................................
+// //...........................................................................................
 
 // import React from "react";
 // import { assets } from "../assets/assets";
 // import { useAppContext } from "../context/AppContext";
-
-
 
 
 // const ProductCard = ({ product }) => {
@@ -69,107 +13,102 @@
 //     console.warn("⚠️ ProductCard received invalid product:", product);
 //     return null;
 //   }
-  
-// console.log(product);
-// console.log(product.gd46g23h);
 
-//     const quantity = (cartItems && cartItems[product._id]) || 0;
+//   // ✅ Get product quantity from cart
+//   const quantity = (cartItems && cartItems[product._id]) || 0;
 
 //   return (
-//     product && (
-//       <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
-        
-//         {/* Product Image */}
-//         <div
-//           className="group cursor-pointer flex items-center justify-center px-2"
-//           onClick={() => navigate(`/product/${product._id}`)} // navigate to product details (optional)
-//         >
-//           <img
-//             className="group-hover:scale-105 transition max-w-26 md:max-w-36"
-//             src={product.image[0]}
-//             alt={product.name}
-//           />
+//     <div onClick={()=>{navigate('/products/${product.category.toLowerCase()}/${product._id}'); scrollTo(0,0)}} className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
+//       {/* Product Image */}
+//       <div
+//         className="group cursor-pointer flex items-center justify-center px-2"
+//         onClick={() => navigate(`/product/${product._id}`)}
+//       >
+//         <img
+//           className="group-hover:scale-105 transition max-w-26 md:max-w-36"
+//           src={product.image[0]}
+//           alt={product.name}
+//         />
+//       </div>
+
+//       {/* Product Info */}
+//       <div className="text-gray-500/60 text-sm">
+//         <p>{product.category}</p>
+//         <p className="text-gray-700 font-medium text-lg truncate w-full">
+//           {product.name}
+//         </p>
+
+//         {/* Rating */}
+//         <div className="flex items-center gap-0.5">
+//           {Array(5)
+//             .fill("")
+//             .map((_, i) => (
+//               <img
+//                 key={i}
+//                 src={i < 4 ? assets.star_icon : assets.star_dull_icon}
+//                 className="md:w-3.5 w-3"
+//                 alt=""
+//               />
+//             ))}
+//           <p>({4})</p>
 //         </div>
 
-//         {/* Product Info */}
-//         <div className="text-gray-500/60 text-sm">
-//           <p>{product.category}</p>
-//           <p className="text-gray-700 font-medium text-lg truncate w-full">
-//             {product.name}
+//         {/* Price + Add / Quantity */}
+//         <div className="flex items-end justify-between mt-3">
+//           <p className="md:text-xl text-base font-medium text-[#4fbf8b]">
+//             {currency}${product.offerPrice}{" "}
+//             <span className="text-gray-500/60 md:text-sm text-xs line-through">
+//               {currency}${product.price}
+//             </span>
 //           </p>
 
-//           {/* Rating */}
-//           <div className="flex items-center gap-0.5">
-//             {Array(5)
-//               .fill("")
-//               .map((_, i) => (
-//                 <img
-//                   key={i}
-//                   src={i < 4 ? assets.star_icon : assets.star_dull_icon}
-//                   className="md:w-3.5 w-3"
-//                   alt=""
-//                 />
-//               ))}
-//             <p>({4})</p>
-//           </div>
-
-//           {/* Price + Add to Cart */}
-//           <div className="flex items-end justify-between mt-3">
-//             <p className="md:text-xl text-base font-medium text-indigo-500">
-//               {currency}${product.offerPrice}{" "}
-//               <span className="text-gray-500/60 md:text-sm text-xs line-through">
-//                 {currency}${product.price}
-//               </span>
-//             </p>
-
-//             <div className="text-indigo-500">
-//               {!cartItems?.[product._id] ? (
-//                 // Add to Cart button
+//           {/* ✅ Updated Section */}
+//           <div className="text-[#4fbf8b]" onClick={(e)=>{e.stopPropogation(); }}>
+//             {quantity === 0 ? (
+//               // Add button
+//               <button
+//                 className="flex items-center justify-center gap-1 bg-[#44ae7c]/10 border border-[#44ae7c]md:w-20 w-16 h-[34px] rounded text-[#44ae7c] font-medium"
+//                 onClick={() => addToCart(product)}
+//               >
+//                 <img src={assets.cart_icon} alt="Cart" />
+//                 Add
+//               </button>
+//             ) : (
+//               // Quantity control
+//               <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-[#4fbf8b]/25 rounded select-none">
 //                 <button
-//                   className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-20 w-16 h-[34px] rounded text-indigo-600 font-medium"
-//                   onClick={() => addToCart(product)}
+//                   onClick={() => removeFromCart(product._id)}
+//                   className="cursor-pointer text-md px-2 h-full"
 //                 >
-//                   <img src={assets.cart_icon} alt="Cart" />
-//                   Add
+//                   -
 //                 </button>
-//               ) : (
-//                 // Quantity control
-//                 <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-indigo-500/25 rounded select-none">
-//                   <button
-//                     onClick={() => removeFromCart(product._id)}
-//                     className="cursor-pointer text-md px-2 h-full"
-//                   >
-//                     -
-//                   </button>
-//                   <span className="w-5 text-center">{cartItems[product._id]}</span>
-//                   <button
-//                     onClick={() => addToCart(product)}
-//                     className="cursor-pointer text-md px-2 h-full"
-//                   >
-//                     +
-//                   </button>
-//                 </div>
-//               )}
-//             </div>
+//                 <span className="w-5 text-center">{quantity}</span>
+//                 <button
+//                   onClick={() => addToCart(product)}
+//                   className="cursor-pointer text-md px-2 h-full"
+//                 >
+//                   +
+//                 </button>
+//               </div>
+//             )}
 //           </div>
 //         </div>
 //       </div>
-//     )
+//     </div>
 //   );
 // };
 
 // export default ProductCard;
 
-//...........................................................................................
 
 import React from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
-
 const ProductCard = ({ product }) => {
   const { currency, cartItems, addToCart, removeFromCart, navigate } = useAppContext();
 
+  // ✅ Safety check
   if (!product || !product._id) {
     console.warn("⚠️ ProductCard received invalid product:", product);
     return null;
@@ -179,21 +118,24 @@ const ProductCard = ({ product }) => {
   const quantity = (cartItems && cartItems[product._id]) || 0;
 
   return (
-    <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
+    <div
+      onClick={() => {
+        navigate(`/products/${product.category.toLowerCase()}/${product._id}`);
+        scrollTo(0, 0);
+      }}
+      className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full cursor-pointer hover:shadow-md transition"
+    >
       {/* Product Image */}
-      <div
-        className="group cursor-pointer flex items-center justify-center px-2"
-        onClick={() => navigate(`/product/${product._id}`)}
-      >
+      <div className="group flex items-center justify-center px-2">
         <img
           className="group-hover:scale-105 transition max-w-26 md:max-w-36"
-          src={product.image[0]}
+          src={product.image?.[0]}
           alt={product.name}
         />
       </div>
 
       {/* Product Info */}
-      <div className="text-gray-500/60 text-sm">
+      <div className="text-gray-500/60 text-sm mt-2">
         <p>{product.category}</p>
         <p className="text-gray-700 font-medium text-lg truncate w-full">
           {product.name}
@@ -208,27 +150,30 @@ const ProductCard = ({ product }) => {
                 key={i}
                 src={i < 4 ? assets.star_icon : assets.star_dull_icon}
                 className="md:w-3.5 w-3"
-                alt=""
+                alt="star"
               />
             ))}
-          <p>({4})</p>
+          <p>(4)</p>
         </div>
 
         {/* Price + Add / Quantity */}
         <div className="flex items-end justify-between mt-3">
           <p className="md:text-xl text-base font-medium text-[#4fbf8b]">
-            {currency}${product.offerPrice}{" "}
+            {currency}{product.offerPrice}{" "}
             <span className="text-gray-500/60 md:text-sm text-xs line-through">
-              {currency}${product.price}
+              {currency}{product.price}
             </span>
           </p>
 
-          {/* ✅ Updated Section */}
-          <div className="text-[#4fbf8b]" onClick={(e)=>{e.stopPropogation(); }}>
+          {/* Add / Quantity Control */}
+          <div
+            className="text-[#4fbf8b]"
+            onClick={(e) => e.stopPropagation()} // Prevents card click
+          >
             {quantity === 0 ? (
               // Add button
               <button
-                className="flex items-center justify-center gap-1 bg-[#44ae7c]/10 border border-[#44ae7c]md:w-20 w-16 h-[34px] rounded text-[#44ae7c] font-medium"
+                className="flex items-center justify-center gap-1 bg-[#44ae7c]/10 border border-[#44ae7c] md:w-20 w-16 h-[34px] rounded text-[#44ae7c] font-medium hover:bg-[#44ae7c]/20 transition"
                 onClick={() => addToCart(product)}
               >
                 <img src={assets.cart_icon} alt="Cart" />
@@ -260,5 +205,3 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
-
-
