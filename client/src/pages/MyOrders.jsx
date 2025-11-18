@@ -8,6 +8,7 @@ function MyOrders() {
   const { currency, user } = useAppContext();
 
   // USE DUMMY DATA INSTEAD OF API
+  
   const fetchMyOrders = async () => {
     try {
       setMyOrders(dummyOrders); 
