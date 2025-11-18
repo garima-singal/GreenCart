@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
@@ -21,74 +22,70 @@ export const AppContextProvider = ({ children }) => {
     setProducts(dummyProducts);
   };
 
-  //  ADD TO CART (Corrected)
+  //  ADD TO CART
   const addToCart = (id) => {
     const product = products.find((p) => p._id === id);
 
     if (!product) {
-      console.warn(" Product not found for ID:", id);
+      console.warn("Product not found:", id);
       return;
     }
 
-    setCartItems((prevCart) => {
-      const newCart = structuredClone(prevCart);
-      newCart[id] = (newCart[id] || 0) + 1;
+    setCartItems((prev) => {
+      const updated = { ...prev };
+      updated[id] = (updated[id] || 0) + 1;
 
       toast.success(`${product.name} added to cart`);
-      console.log("🛒 Cart after add:", newCart);
-
-      return newCart;
+      return updated;
     });
   };
 
   //  REMOVE FROM CART
   const removeFromCart = (id) => {
-    setCartItems((prevCart) => {
-      const newCart = structuredClone(prevCart);
+    setCartItems((prev) => {
+      const updated = { ...prev };
 
-      if (newCart[id]) {
-        newCart[id] -= 1;
-        if (newCart[id] <= 0) delete newCart[id];
+      if (updated[id] > 1) {
+        updated[id] -= 1;
+      } else {
+        delete updated[id];
       }
 
-      toast.success("Removed from cart");
-      console.log(" Cart after remove:", newCart);
-
-      return newCart;
+      toast.success("Item removed from cart");
+      return updated;
     });
   };
-  //GET CART ITEM COUNT 
-    const getCartCount = ()=>{
-      let totalCount=0;
-      for(const item in cartItems){
-        totalCount+=cartItems[item]
-      }
-      return totalCount;
+
+  //  UPDATE CART ITEM QUANTITY
+  const updateCartItem = (id, qty) => {
+    setCartItems((prev) => ({
+      ...prev,
+      [id]: qty,
+    }));
+  };
+
+  //  GET TOTAL CART COUNT
+  const getCartCount = () => {
+    let total = 0;
+    for (const item in cartItems) {
+      total += cartItems[item];
     }
-  
-  //TOTAL CART AMOUNT
-     const getCartAmounnt = ()=>{
-      let totalAmount = 0;
-      for(const items in cartItems){
-        let itemInfo = products.find((product)=>product._id === items);
-        if(cartItems[Items]>0){
-          totalAmount+= itemInfo.offerPrice * cartItems[items]
-        }
+    return total;
+  };
+
+  //  GET TOTAL CART AMOUNT
+  const getCartAmount = () => {
+    let totalAmount = 0;
+
+    for (const id in cartItems) {
+      const product = products.find((p) => p._id === id);
+
+      if (product) {
+        totalAmount += product.offerPrice * cartItems[id];
       }
-      return Math.floor(totalAmount*100)/100;
-     }
+    }
 
-  //  UPDATE CART QUANTITY
-  const updateCartItem = (id, quantity) => {
-    setCartItems((prevCart) => {
-      const newCart = structuredClone(prevCart);
-      newCart[id] = quantity;
-
-      toast.success("Cart updated");
-      console.log(" Cart after update:", newCart);
-
-      return newCart;
-    });
+    return Math.floor(totalAmount * 100) / 100;
   };
 
   useEffect(() => {
@@ -103,21 +100,23 @@ export const AppContextProvider = ({ children }) => {
     setIsSeller,
     showUserLogin,
     setShowUserLogin,
+
+    // products & search
     products,
     currency,
-    cartItems,
-    addToCart,
-    updateCartItem,
-    removeFromCart,
     searchQuery,
     setSearchQuery,
-    getCartAmounnt,
-    getCartCount
+
+    // cart
+    cartItems,
+    addToCart,
+    removeFromCart,
+    updateCartItem,
+    getCartCount,
+    getCartAmount,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+export const useAppContext = () => useContext(AppContext);
