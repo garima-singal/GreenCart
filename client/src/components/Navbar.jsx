@@ -77,10 +77,20 @@ useEffect(()=>{
         )}
       </div>
 
+      <div className='flex items-center gap-6 sm:hidden'>
+      <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
+          <img src={assets.nav_cart_icon} alt="Cart" className='w-6 opacity-80' />
+          <button className="absolute -top-2 -right-3 text-xs text-white bg-[#4fbf8b] w-[18px] h-[18px] rounded-full">
+                {getCartCount()}
+            </button>
+        </div>
+
       {/* MOBILE MENU BUTTON */}
-      <button onClick={() => setOpen(!open)} aria-label="Menu" className="sm:hidden">
+      <button onClick={() => setOpen(!open)} aria-label="Menu" className=" ">
         <img src={assets.menu_icon} alt="menu" />
       </button>
+      </div>
+
 
       {/* MOBILE MENU DROPDOWN */}
       {open && (
