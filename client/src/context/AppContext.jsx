@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }) => {
     const product = products.find((p) => p._id === id);
 
     if (!product) {
-      console.warn("❌ Product not found for ID:", id);
+      console.warn(" Product not found for ID:", id);
       return;
     }
 
@@ -52,7 +52,7 @@ export const AppContextProvider = ({ children }) => {
       }
 
       toast.success("Removed from cart");
-      console.log("🗑️ Cart after remove:", newCart);
+      console.log(" Cart after remove:", newCart);
 
       return newCart;
     });
@@ -85,7 +85,7 @@ export const AppContextProvider = ({ children }) => {
       newCart[id] = quantity;
 
       toast.success("Cart updated");
-      console.log("🔄 Cart after update:", newCart);
+      console.log(" Cart after update:", newCart);
 
       return newCart;
     });

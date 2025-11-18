@@ -1,37 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-
-@import "tailwindcss";
-
-
-*{
-    font-family: "Outfit", sans-serif;
-}
-
-
-
-:root {
-    --color-primary: #4fbf8b;
-    --color-primary-dull:#44ae7c;
-} */
-
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-
-* {
-  font-family: "Outfit", sans-serif;
-}
-
-:root {
-  --color-primary: #4fbf8b;
-  --color-primary-dull: #44ae7c;
-} */
-
-
-
-
 
 
 /* import before css */
