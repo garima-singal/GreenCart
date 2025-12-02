@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 
-// ⭐ Correct Input Field Component
+//  Correct Input Field Component
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
   <input
     className="w-full px-3 py-2.5 border border-gray-400 rounded outline-none text-gray-700 
@@ -28,7 +28,7 @@ const AddAddress = () => {
     phone: "",
   });
 
-  // ⭐ Correct handleChange
+  //  Correct handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddress((prev) => ({
@@ -37,7 +37,7 @@ const AddAddress = () => {
     }));
   };
 
-  // ⭐ Submit Handler
+  //  Submit Handler
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log("Address Submitted: ", address);
