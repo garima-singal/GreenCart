@@ -46,6 +46,10 @@ app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
 
-app.listen(port, () => {
+
+if(process.env.NODE_ENV != "production"){
+    app.listen(port, () => {
     console.log(`PORT connected on ${port}`);
-})
+})}
+
+export default server;//export server for vercel 
